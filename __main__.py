@@ -8,6 +8,7 @@ from sys import exit
 from utils.open_json import open_json
 from os import getcwd
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
 
@@ -17,12 +18,12 @@ load_dotenv()
 # 2. Tree tag, reveals the file tree
 # 3.
 
-CONFIG = './config.json'
+CONFIG_PATH = os.getenv('CONFIG_PATH')
 
 if __name__ == "__main__":
     args = parser.parse_args()
     entry = args.source if args.source else getcwd()
-    config = open_json(CONFIG)
+    config = open_json(CONFIG_PATH)
 
     if args.config:
         display_config(config)
