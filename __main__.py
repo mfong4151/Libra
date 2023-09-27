@@ -7,6 +7,9 @@ from display_config.display_config import display_config
 from sys import exit
 from utils.open_json import open_json
 from os import getcwd
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 ##Should be able to support the following flags:
@@ -26,8 +29,6 @@ if __name__ == "__main__":
         exit()
 
     if args.ignore_folders or args.ignore_files: 
-
-
         exit()
 
 
