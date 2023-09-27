@@ -1,0 +1,10 @@
+{
+    "ignored_files":[
+
+    ],
+    "ignored_folders":[
+        "node_modules",
+        "__pycache__"
+    ]
+
+}
