@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from file_parsing.extract import extract_file_body, extract_file_tree
 from file_parsing.estimate_tokens import estimate_tokens, warn_excession
 from file_parsing.copy_to_clipboard import copy_to_clipboard
