@@ -18,7 +18,7 @@ load_dotenv()
 # 2. Tree tag, reveals the file tree
 # 3.
 
-CONFIG_PATH = os.getenv('CONFIG_PATH')
+CONFIG_PATH = ''
 
 if __name__ == "__main__":
     args = parser.parse_args()
