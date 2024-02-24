@@ -9,7 +9,6 @@ from sys import exit
 from utils.open_json import open_json
 from os import getcwd
 from dotenv import load_dotenv
-import os
 
 load_dotenv()
 
@@ -24,18 +23,17 @@ CONFIG_PATH = ''
 if __name__ == "__main__":
     args = parser.parse_args()
     entry = args.source if args.source else getcwd()
-    config = open_json(CONFIG_PATH)
+    config = open_json(CONFIG_PATH if CONFIG_PATH else './config.json')
+    
+    # Gets the child most file path for use in file path namings, we assume the last item is the cwd
+    full_file_path    = getcwd()
+    shortend_cwd = full_file_path[full_file_path.rfind('/'):]
 
-    if args.config:
-        display_config(config)
-        exit()
-
-    if args.ignore_folders or args.ignore_files: 
-        exit()
-
+    
 
     if args.files:
-        file_contents = extract_file_body(config, entry)
+        file_contents = extract_file_body(config, shortend_cwd, entry )
+        # file_contents = prepare_clipboard(file_contents, args)
         copy_to_clipboard(file_contents)
         num_tokens = estimate_tokens(file_contents)
         warn_excession(num_tokens)

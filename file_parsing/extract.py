@@ -12,23 +12,25 @@ def unpack_config(config) -> List[str]:
     return ignored_files, ignored_folders
 
 
-def extract_file_body(config, dir: str = getcwd()) -> str:
+def extract_file_body(config, shortend_cwd: str, file_path: str ) -> str:
+    
     res = []
     ignored_files, ignored_folders = unpack_config(config)
     
-    def dfs(dir: str) -> None:
-        if isfile(dir):
-            contents = stringify_file(dir)
+    def dfs(file_path: str) -> None:
+        if isfile(file_path):
+            contents = stringify_file(shortend_cwd, file_path)
             res.append(contents)
             return
 
-        for file in listdir(dir):
-            if file in ignored_files or file in  ignored_folders:
-                continue
-            dfs(f"{dir}/{file}")
+
+        for file in listdir(file_path):
+            if  not (file in ignored_files or file in  ignored_folders):
+                dfs(f"{file_path}/{file}")
+        
         return
 
-    dfs(dir)
+    dfs(file_path)
     return "\n\n".join(res)
 
 
